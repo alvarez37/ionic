@@ -1,0 +1,63 @@
+  <ion-toolbar>
+    <ion-title size="large" size="large" color="Dark">
+          <h1>
+            <b>Objetos perdidos</b>
+          </h1>
+    </ion-title>
+  </ion-toolbar>
+
+
+  <!-- Searchbar with value -->
+<!-- <ion-searchbar ></ion-searchbar> -->
+
+<ion-content >
+    <div class="content"> 
+
+  <ion-grid  >
+    <ion-row>
+      <ion-col  *ngFor ="let objeto of objetos" (click)="openobjeto(objeto)" size="6">
+
+          <ion-card>
+            <ion-list>
+              <ion-img [src]="objeto.img"></ion-img>
+            </ion-list>
+    
+
+              <ion-card-header>
+                <ion-card-subtitle>{{objeto.Lugar}}</ion-card-subtitle>
+                <ion-card-title>{{objeto.nombre}}</ion-card-title>
+              </ion-card-header>
+           
+            </ion-card>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</div>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button  color="medium">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="top">
+    <ion-fab-button  (click)="Onlogout()" > 
+        <ion-icon ios="ios-power" md="md-power"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+
+ 
+
+  <ion-fab-list side="start">
+    <ion-fab-button  (click)="openadd()" > 
+        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+
+</ion-fab>

@@ -1,0 +1,42 @@
+
+    <ion-toolbar color="Light">
+      <ion-button slot="start" fill="clear" (click)="closeModal()">
+        <ion-icon   name="arrow-round-back"></ion-icon>
+      </ion-button>
+      <ion-title>  {{objeto.nombre}}</ion-title>
+    </ion-toolbar>
+
+
+  
+
+    <ion-content >
+
+
+  <ion-card>
+      <ion-img   [src]="objeto.img"></ion-img>
+
+      <ion-card-header>
+        <ion-card-subtitle>{{objeto.Lugar}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-list>
+            {{objeto.descripcion}}
+        </ion-list>
+
+        <ion-list>
+            {{objeto.Hora}}
+        </ion-list>
+
+        <ion-list>
+          <h3> Encontrado por:   {{objeto.descripcion}}   </h3>
+         </ion-list>
+
+
+        </ion-card-content>
+   
+    </ion-card>
+
+
+  </ion-content>

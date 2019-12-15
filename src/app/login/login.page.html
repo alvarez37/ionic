@@ -1,0 +1,69 @@
+<script src="/__/firebase/6.2.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+<ion-content class="swiper-no-swiping">
+ 
+  <div class="container top">
+    <ion-segment  color="dark" (ionChange)="segmentChanged($event)" mode="ios" value="login">
+      <ion-segment-button mode="ios" value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="register">
+        <ion-label>registrarse</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-slides>
+    <ion-slide>
+
+
+      <div class="slide-inner ion-padding">
+        <span>Login</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-mail" [(ngModel)]="LoginEmail"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="contraseña" [(ngModel)]="LoginPassword" ></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block">
+          Entrar
+        </ion-button>
+      </div>
+    </ion-slide>
+
+
+ 
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+        <span>registrarse</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Nombre" [(ngModel)]="RegisterNombre " ></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-mail" [(ngModel)]="RegisterEmail"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="contraseña" [(ngModel)]="RegisterPassword"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" (click)="registrarse()" color="light" expand="block">
+          registrarse
+        </ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides> 
+
+
+</ion-content>

@@ -1,0 +1,188 @@
+import { Component, OnInit } from '@angular/core';
+import {TodoService, objeto} from '../../services/todo.service';
+
+
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+
+
+// export interface MyData {
+//   name: string;
+//   filepath: string;
+//   size: number;
+// }
+
+
+@Component({
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.scss'],
+})
+export class AddComponent implements OnInit {
+  image: string
+
+  public objetos :any = [];
+
+  // // Upload Task 
+  // task: AngularFireUploadTask;
+ 
+  // // Progress in percentage
+  // percentage: Observable<number>;
+ 
+  // // Snapshot of uploading file
+  // snapshot: Observable<any>;
+ 
+  // // Uploaded File URL
+  // UploadedFileURL: Observable<string>;
+ 
+  // //Uploaded Image List
+  // images: Observable<MyData[]>;
+ 
+  // //File details  
+  // fileName:string;
+  // fileSize:number;
+ 
+  // //Status check 
+  // isUploading:boolean;
+  // isUploaded:boolean;
+ 
+  // private imageCollection: AngularFirestoreCollection<MyData>;
+  constructor(
+    private camera: Camera,
+
+    public todoService:TodoService,
+    // private storage: AngularFireStorage, 
+    // private database: AngularFirestore,
+
+  ) {
+    // this.isUploading = false;
+    // this.isUploaded = false;
+    // //Set collection where our documents/ images info will save
+    // this.imageCollection = database.collection<MyData>('images');
+    // this.images = this.imageCollection.valueChanges(); 
+  }
+
+  ngOnInit() {}
+
+  Lugar:string="";
+  Hora:string="";
+  Email:string="";
+  objeto:string="";
+  Descripcion:string="";
+  img:string="";
+
+  sendMessage(){
+    this.Hora=new Date().toISOString();
+    this.todoService.addUser(this.Lugar,this.Hora,this.Email,this.objeto,this.Descripcion,this.img);
+    this.Lugar='';
+    this.Hora='';
+    this.Email='';
+    this.objeto='';
+    this.Descripcion='';
+    this.img='';
+    this.image='';
+
+  }
+
+
+  
+  // uploadFile(event: FileList) {
+    
+  //   console.log("Ejecuto evento");
+  //   // The File object
+  //   const file = event.item(0)
+ 
+  //   // Validation for Images Only
+  //   if (file.type.split('/')[0] !== 'image') { 
+  //    console.error('unsupported file type :( ')
+  //    return;
+  //   }
+ 
+  //   this.isUploading = true;
+  //   this.isUploaded = false;
+ 
+ 
+  //   this.fileName = file.name;
+ 
+  //   // The storage path
+  //   const path = `images/${ new Date().getTime()}_${file.name}`;
+ 
+  //   // Totally optional metadata
+  //   const customMetadata = { app: 'Freaky Image Upload Demo' };
+ 
+  //   //File reference
+  //   const fileRef = this.storage.ref(path);
+ 
+  //   // The main task
+  //   this.task = this.storage.upload(path, file, { customMetadata });
+    
+  //   // Get file progress percentage
+  //   this.percentage = this.task.percentageChanges();
+    
+  
+  //   this.task.snapshotChanges().pipe(
+      
+  //     finalize(() => {
+  //       // Get uploaded file storage path
+  //       console.log("Finalizo la carga");
+  //       this.UploadedFileURL = fileRef.getDownloadURL();
+  //       this.UploadedFileURL.subscribe(resp=>{
+  //         console.log(resp);
+  //         this.img = resp;
+
+  //         /*this.addImagetoDB({
+  //           name: file.name,
+  //           filepath: resp,
+  //           size: this.fileSize
+  //         })*/;
+  //       //  this.isUploading = false;
+  //       //  this.isUploaded = true;
+  //       },error=>{
+  //         console.error(error);
+  //       })
+  //     }),
+  //     tap(snap => {
+  //         console.log(snap.totalBytes);
+  //         this.fileSize = snap.totalBytes;
+  //     }),
+  //   ).subscribe();
+  //   //console.log("URL");
+  //   //console.log(this.UploadedFileURL[0]);
+
+  //   //(this.img) = this.UploadedFileURL;
+    
+   
+  // }
+
+
+
+  takePicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      //destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    };
+    this.camera.getPicture(options)
+    .then((imageData) => {
+      //this.image = this.webView.convertFileSrc(imageData);
+      this.image = 'data:image/jpeg;base64,'+imageData;
+      this.img='data:image/jpeg;base64,'+imageData;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+
+
+
+}
+
+

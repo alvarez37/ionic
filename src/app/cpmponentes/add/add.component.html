@@ -1,0 +1,52 @@
+
+  
+  <ion-toolbar color="Light">
+      <ion-button color="Light" slot="start" fill="clear" (click)="closeModal()">
+        <ion-icon  color="Light" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+
+
+<ion-content>
+  
+    <ion-title   > <b>Agregar item</b> </ion-title>
+ 
+    <div class="inputs">
+
+        <ion-input [(ngModel)]="Lugar" placeholder="Lugar"></ion-input>
+        <ion-input [(ngModel)]="objeto" placeholder="Objeto"></ion-input>
+        <ion-input [(ngModel)]="Descripcion" placeholder="Descripcion"></ion-input>
+      
+
+
+
+
+
+        
+        <div *ngIf="percentage | async as pct">
+            Progress: {{ pct | number }}%
+            <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+          </div>
+          
+    
+          <ion-button color="light" (click)="takePicture()" >
+               <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </ion-button>
+          <img *ngIf="image" [src]="image" alt="image">
+
+    </div>
+      
+
+      
+      
+        <ion-fab (click)="sendMessage()" vertical="bottom" horizontal="end" slot="fixed">
+          
+            <ion-fab-button color="dark">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+
+
+</ion-content>
+  
+ 
